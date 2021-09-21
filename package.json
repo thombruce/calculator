@@ -13,6 +13,7 @@
   "dependencies": {
     "@thombruce/tnt": "^0.1.5",
     "core-js": "^3.6.5",
+    "mathjs": "^9.4.5",
     "vue": "^2.6.11"
   },
   "devDependencies": {

@@ -28,6 +28,10 @@ div
 </template>
 
 <script>
+import { create, all } from 'mathjs'
+
+const math = create(all, { number: 'BigNumber' })
+
 export default {
   data () {
     return {
@@ -81,22 +85,10 @@ export default {
       this.newEntry = false
     },
     performPreviousOperation () {
-      switch (this.currentOperation) {
-        case '+':
-          this.currentValue += Number(this.operativeValue)
-          break
-        case '-':
-          this.currentValue -= Number(this.operativeValue)
-          break
-        case '*':
-          this.currentValue *= Number(this.operativeValue)
-          break
-        case '/':
-          this.currentValue /= Number(this.operativeValue)
-          break
-        default:
-          this.currentValue = Number(this.operativeValue)
-          break
+      if (this.currentOperation) {
+        this.currentValue = math.evaluate(`${this.currentValue} ${this.currentOperation} ${this.operativeValue}`)
+      } else {
+        this.currentValue = Number(this.operativeValue)
       }
       this.displayValue = String(this.currentValue)
     },
@@ -107,9 +99,9 @@ export default {
     },
     percent () {
       if (this.currentOperation === '*' || this.currentOperation === '/' || this.currentOperation === '') {
-        this.operativeValue = Number(this.operativeValue) / 100
+        this.operativeValue = math.evaluate(`${this.operativeValue} / 100`)
       } else {
-        this.operativeValue = Number(this.currentValue) / 100 * Number(this.operativeValue)
+        this.operativeValue = math.evaluate(`${this.currentValue} / 100 * ${this.operativeValue}`)
       }
       this.displayValue = String(this.operativeValue)
       this.newEntry = true
