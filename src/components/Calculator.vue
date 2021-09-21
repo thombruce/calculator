@@ -9,19 +9,19 @@ div
       button.btn.btn-warning(v-else @click='clear()') C
       button.btn(@click='negate()') +/-
       button.btn(@click='percent()') %
-      button.btn(@click='divide()' :class="currentOperation === '/' ? 'btn-accent' : ''") ÷
+      button.btn(@click="setCurrentOperation('/')" :class="(currentOperation === '/') ? 'btn-accent' : ''") ÷
       button.btn(@click="addNumeral('7')") 7
       button.btn(@click="addNumeral('8')") 8
       button.btn(@click="addNumeral('9')") 9
-      button.btn(@click='multiply()' :class="currentOperation === '*' ? 'btn-accent' : ''") ×
+      button.btn(@click="setCurrentOperation('*')" :class="(currentOperation === '*') ? 'btn-accent' : ''") ×
       button.btn(@click="addNumeral('4')") 4
       button.btn(@click="addNumeral('5')") 5
       button.btn(@click="addNumeral('6')") 6
-      button.btn(@click='minus()' :class="currentOperation === '-' ? 'btn-accent' : ''") -
+      button.btn(@click="setCurrentOperation('-')" :class="(currentOperation === '-') ? 'btn-accent' : ''") -
       button.btn(@click="addNumeral('1')") 1
       button.btn(@click="addNumeral('2')") 2
       button.btn(@click="addNumeral('3')") 3
-      button.btn(@click='plus()' :class="currentOperation === '+' ? 'btn-accent' : ''") +
+      button.btn(@click="setCurrentOperation('+')" :class="(currentOperation === '+') ? 'btn-accent' : ''") +
       button.btn.col-span-2(@click="addNumeral('0')") 0
       button.btn(@click="addDecimal()") .
       button.btn.btn-primary(@click="equals()") =
@@ -33,8 +33,9 @@ div
 export default {
   data () {
     return {
+      currentValue: 0,
+      operativeValue: 0,
       displayValue: '0',
-      currentExpression: '',
       currentOperation: '',
       newEntry: true
     }
@@ -46,29 +47,23 @@ export default {
   },
   methods: {
     allClear () {
-      this.displayValue = '0'
-      this.currentExpression = ''
+      this.clear()
+      this.currentValue = 0
       this.currentOperation = ''
-      this.newEntry = true
     },
     clear () {
+      this.operativeValue = 0
       this.displayValue = '0'
       this.newEntry = true
     },
-    appendOperation () {
-      this.currentExpression += (this.currentOperation ? ` ${this.currentOperation} ` : '') + this.displayValue
-      this.displayValue = '' + eval(this.currentExpression)
-      this.currentOperation = ''
-    },
     negate () {
-      if (this.newEntry) {
-        this.displayValue = '-0'
-        this.newEntry = false
-      } else if (this.displayValue.startsWith('-')) {
+      if (this.displayValue.startsWith('-')) {
         this.displayValue = this.displayValue.slice(1)
       } else {
         this.displayValue = '-' + this.displayValue
       }
+      this.operativeValue = Number(this.displayValue)
+      this.newEntry = false
     },
     addNumeral (numeral) {
       if (this.newEntry) {
@@ -79,45 +74,51 @@ export default {
       } else {
         this.displayValue += numeral
       }
+      this.operativeValue = Number(this.displayValue)
     },
     addDecimal () {
-      if (this.newEntry) {
-        this.displayValue = '0.'
-        this.newEntry = false
-      } else if (!this.displayValue.match(/\./)) {
+      if (!this.displayValue.match(/\./)) {
         this.displayValue += '.'
       }
+      this.newEntry = false
     },
-    plus () {
-      if (!this.newEntry) this.appendOperation()
-      this.currentOperation = '+'
-      this.newEntry = true
+    performPreviousOperation () {
+      switch (this.currentOperation) {
+        case '+':
+          this.currentValue += Number(this.operativeValue)
+          break
+        case '-':
+          this.currentValue -= Number(this.operativeValue)
+          break
+        case '*':
+          this.currentValue *= Number(this.operativeValue)
+          break
+        case '/':
+          this.currentValue /= Number(this.operativeValue)
+          break
+        default:
+          this.currentValue = Number(this.operativeValue)
+          break
+      }
+      this.displayValue = String(this.currentValue)
     },
-    minus () {
-      if (!this.newEntry) this.appendOperation()
-      this.currentOperation = '-'
-      this.newEntry = true
-    },
-    multiply () {
-      if (!this.newEntry) this.appendOperation()
-      this.currentOperation = '*'
-      this.newEntry = true
-    },
-    divide () {
-      if (!this.newEntry) this.appendOperation()
-      this.currentOperation = '/'
+    setCurrentOperation (operator) {
+      if (!this.newEntry) this.performPreviousOperation()
+      this.currentOperation = operator
       this.newEntry = true
     },
     percent () {
       if (this.currentOperation === '*' || this.currentOperation === '/' || this.currentOperation === '') {
-        this.displayValue = eval(this.displayValue + '/ 100')
+        this.operativeValue = Number(this.operativeValue) / 100
       } else {
-        this.displayValue = eval(`(${this.currentExpression}) / 100 * ${this.displayValue}`)
+        this.operativeValue = Number(this.currentValue) / 100 * Number(this.operativeValue)
       }
+      this.displayValue = String(this.operativeValue)
+      this.newEntry = true
     },
     equals () {
-      if (!this.newEntry) this.appendOperation()
-      this.currentExpression = ''
+      this.performPreviousOperation()
+      this.newEntry = true
     }
   }
 }
