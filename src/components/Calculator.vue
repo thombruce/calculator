@@ -1,7 +1,13 @@
 <template lang='pug'>
 div
   .flex.flex-col.gap-4
-    CalculatorScreen(:displayValue='displayValue')
+    //- Let's start using v-model; we can pass displayValue to CalculatorScreen easily!
+    CalculatorScreen(v-model='displayValue')
+    //- What we are actually going to want is to extract calculator logic into a custom
+    //- Calculator class. We could then pass the current instance of Calculator to v-model
+    //- and manipulate its properties as we like. Those properties should then persist to other
+    //- components since it was instantiated at the parent, here.
+    //- Key is to make this a Vue.observable object, as I have done in the past here: https://github.com/thombruce/helvellyn-gun/blob/955a77c40f79138230046a4ea1d14de309cafd3d/services/store/user.js
     CalculatorKeypad(
       :isAllClear='isAllClear'
       :currentOperation='currentOperation'
