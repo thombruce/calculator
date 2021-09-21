@@ -28,8 +28,6 @@ div
 </template>
 
 <script>
-/* eslint no-eval: "off" */
-
 export default {
   data () {
     return {
