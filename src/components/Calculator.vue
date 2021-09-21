@@ -1,38 +1,27 @@
 <template lang='pug'>
 div
   .flex.flex-col.gap-4
-    .card.glass
-      .card-body.text-right.text-4xl.font-mono
-        | {{ displayValue }}
-    .grid.grid-cols-4.gap-4
-      button.btn.btn-error(v-if="isAllClear" @click='allClear()') AC
-      button.btn.btn-warning(v-else @click='clear()') C
-      button.btn(@click='negate()') +/-
-      button.btn(@click='percent()') %
-      button.btn(@click="setCurrentOperation('/')" :class="(currentOperation === '/') ? 'btn-accent' : ''") ÷
-      button.btn(@click="addNumeral('7')") 7
-      button.btn(@click="addNumeral('8')") 8
-      button.btn(@click="addNumeral('9')") 9
-      button.btn(@click="setCurrentOperation('*')" :class="(currentOperation === '*') ? 'btn-accent' : ''") ×
-      button.btn(@click="addNumeral('4')") 4
-      button.btn(@click="addNumeral('5')") 5
-      button.btn(@click="addNumeral('6')") 6
-      button.btn(@click="setCurrentOperation('-')" :class="(currentOperation === '-') ? 'btn-accent' : ''") -
-      button.btn(@click="addNumeral('1')") 1
-      button.btn(@click="addNumeral('2')") 2
-      button.btn(@click="addNumeral('3')") 3
-      button.btn(@click="setCurrentOperation('+')" :class="(currentOperation === '+') ? 'btn-accent' : ''") +
-      button.btn.col-span-2(@click="addNumeral('0')") 0
-      button.btn(@click="addDecimal()") .
-      button.btn.btn-primary(@click="equals()") =
+    CalculatorScreen(:displayValue='displayValue')
+    CalculatorKeypad(
+      :isAllClear='isAllClear'
+      :currentOperation='currentOperation'
+      @emitOperation='catchOperation'
+    )
 </template>
 
 <script>
 import { create, all } from 'mathjs'
 
+import CalculatorScreen from './calculator/Screen.vue'
+import CalculatorKeypad from './calculator/Keypad.vue'
+
 const math = create(all, { number: 'BigNumber' })
 
 export default {
+  components: {
+    CalculatorScreen,
+    CalculatorKeypad
+  },
   data () {
     return {
       currentValue: 0,
@@ -48,6 +37,9 @@ export default {
     }
   },
   methods: {
+    catchOperation (operation, args) {
+      this[operation](args)
+    },
     allClear () {
       this.clear()
       this.currentValue = 0
