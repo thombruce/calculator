@@ -21,9 +21,9 @@ export default {
     CalculatorScreen,
     CalculatorKeypad
   },
-  computed: {
-    calculator () {
-      return Vue.observable(new Calculator())
+  data () {
+    return {
+      calculator: Vue.observable(new Calculator())
     }
   },
   methods: {
