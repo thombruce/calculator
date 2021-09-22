@@ -1,13 +1,18 @@
 <template lang='pug'>
 .card.glass
   .card-body.text-right.text-4xl.font-mono
-    | {{ value }}
+    | {{ displayValue }}
 </template>
 
 <script>
 export default {
   props: [
-    'value'
-  ]
+    'calculator'
+  ],
+  computed: {
+    displayValue () {
+      return this.calculator.displayValue
+    }
+  }
 }
 </script>

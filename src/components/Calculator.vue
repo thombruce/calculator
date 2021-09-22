@@ -1,12 +1,8 @@
 <template lang='pug'>
 div
   .flex.flex-col.gap-4
-    CalculatorScreen(v-model='calculator.displayValue')
-    CalculatorKeypad(
-      :isAllClear='calculator.isAllClear'
-      :currentOperation='calculator.currentOperation'
-      @emitOperation='catchOperation'
-    )
+    CalculatorScreen(:calculator='calculator')
+    CalculatorKeypad(:calculator='calculator')
 </template>
 
 <script>
@@ -24,38 +20,6 @@ export default {
   data () {
     return {
       calculator: Vue.observable(new Calculator())
-    }
-  },
-  methods: {
-    catchOperation (operation, args) {
-      this[operation](args)
-    },
-    allClear () {
-      this.calculator.allClear()
-    },
-    clear () {
-      this.calculator.clear()
-    },
-    negate () {
-      this.calculator.negate()
-    },
-    addNumeral (numeral) {
-      this.calculator.addNumeral(numeral)
-    },
-    addDecimal () {
-      this.calculator.addDecimal()
-    },
-    performPreviousOperation () {
-      this.calculator.performPreviousOperation()
-    },
-    setCurrentOperation (operator) {
-      this.calculator.setCurrentOperation(operator)
-    },
-    percent () {
-      this.calculator.percent()
-    },
-    equals () {
-      this.calculator.equals()
     }
   }
 }
