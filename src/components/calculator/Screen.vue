@@ -1,13 +1,13 @@
 <template lang='pug'>
 .card.glass
   .card-body.text-right.text-4xl.font-mono
-    | {{ displayValue }}
+    | {{ value }}
 </template>
 
 <script>
 export default {
   props: [
-    'displayValue'
+    'value'
   ]
 }
 </script>
