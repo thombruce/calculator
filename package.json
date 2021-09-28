@@ -1,34 +1,14 @@
 {
-  "name": "@thombruce/calculator",
-  "version": "0.4.1",
-  "repository": "https://github.com/thombruce/calculator",
+  "name": "calculator-monorepo",
+  "version": "0.0.0",
   "author": "Thom Bruce <thom@thombruce.com>",
   "license": "MIT",
-  "main": "src/main.js",
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "@thombruce/tnt": "^0.1.5",
-    "core-js": "^3.6.5",
-    "mathjs": "^9.4.5",
-    "vue": "^2.6.11"
-  },
+  "private": "true",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {},
   "devDependencies": {
-    "@thombruce/vue-cli-plugin-tnt": "^0.1.19",
-    "@vue/cli-plugin-babel": "^4.5.0",
-    "@vue/cli-plugin-eslint": "^4.5.0",
-    "@vue/cli-service": "^4.5.0",
-    "@vue/eslint-config-standard": "^5.1.2",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "lerna": "^4.0.0"
   }
 }
