@@ -4,6 +4,9 @@
   "repository": "https://github.com/thombruce/calculator",
   "author": "Thom Bruce <thom@thombruce.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "src/main.js",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -30,5 +33,6 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "gitHead": "0176d2441560b54a1448fc0c380dc1fca3f134b0"
 }
