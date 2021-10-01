@@ -1,7 +1,8 @@
 <template lang='pug'>
 .card.glass
-  .card-body.text-right.text-4xl.font-mono
-    | {{ displayValue }}
+  input.input.input-ghost.input-sm.mt-2.mx-4(v-model='currentExpression')
+  .card-body.font-mono
+    div.text-right.text-4xl {{ displayValue }}
 </template>
 
 <script>
@@ -10,6 +11,14 @@ export default {
     'calculator'
   ],
   computed: {
+    currentExpression: {
+      get () {
+        return this.calculator.currentExpression
+      },
+      set (val) {
+        this.calculator.currentExpression = val
+      }
+    },
     displayValue () {
       return this.calculator.displayValue
     }
