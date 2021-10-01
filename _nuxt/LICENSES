@@ -1,4 +1,17 @@
 /*!
+  * vue-router v3.5.2
+  * (c) 2021 Evan You
+  * @license MIT
+  */
+
+/*!
+ * Vue.js v2.6.14
+ * (c) 2014-2021 Evan You
+ * Released under the MIT License.
+ */
+
+
+/*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <http://feross.org>
@@ -6,22 +19,6 @@
  */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
-
-
-/**
- * @license Complex.js v2.0.15 12/05/2020
- *
- * Copyright (c) 2020, Robert Eisele (robert@xarg.org)
- * Dual licensed under the MIT or GPL Version 2 licenses.
- **/
-
-/**
- * @license Fraction.js v4.1.1 23/05/2021
- * https://www.xarg.org/2014/03/rational-numbers-in-javascript/
- *
- * Copyright (c) 2021, Robert Eisele (robert@xarg.org)
- * Dual licensed under the MIT or GPL Version 2 licenses.
- **/
 
 
 /*!
@@ -51,14 +48,17 @@
  */
 
 
-/*!
-  * vue-router v3.5.2
-  * (c) 2021 Evan You
-  * @license MIT
-  */
+/**
+ * @license Complex.js v2.0.15 12/05/2020
+ *
+ * Copyright (c) 2020, Robert Eisele (robert@xarg.org)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ **/
 
-/*!
- * Vue.js v2.6.14
- * (c) 2014-2021 Evan You
- * Released under the MIT License.
- */
+/**
+ * @license Fraction.js v4.1.1 23/05/2021
+ * https://www.xarg.org/2014/03/rational-numbers-in-javascript/
+ *
+ * Copyright (c) 2021, Robert Eisele (robert@xarg.org)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ **/
