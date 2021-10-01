@@ -1,6 +1,6 @@
 <template lang='pug'>
 .card.glass
-  input.input.input-ghost.input-sm.mt-2.mx-4(v-model='currentExpression')
+  input.input.input-ghost.input-sm.mt-2.mx-4(v-model='currentExpression' @keyup.enter='equals()')
   .card-body.font-mono
     div.text-right.text-4xl {{ displayValue }}
 </template>
@@ -21,6 +21,11 @@ export default {
     },
     displayValue () {
       return this.calculator.displayValue
+    }
+  },
+  methods: {
+    equals () {
+      this.calculator.equals()
     }
   }
 }
